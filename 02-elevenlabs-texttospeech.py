@@ -17,15 +17,18 @@ url = "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 # Replace {voice_id} with an actual voice ID from ElevenLabs
 # voice_id = "q8qwd1jY2jS3AWOBeq25"  # Pratama
 # voice_id = "lFjzhZHq0NwTRiu2GQxy"  # Tri Nugraha (gaya semangat pitch tinggi)
-voice_id = "MCbAOnEVCtn6noXdBIo0"  # Pramoedya Chandra (gaya resmi orang tua)
+# voice_id = "MCbAOnEVCtn6noXdBIo0"  # Pramoedya Chandra (gaya resmi orang tua)
 # voice_id = "OKanSStS6li6xyU1WdXa"  # Meraki
+voice_id = "OKanSStS6li6xyU1WdXa"  # Meraki
 
 # Text to be converted to speech
 # text = "Halo, Akhmad Guntar, apa kabar? Kita akan berdiskusi tentang Kurikulum dan Silabus untuk PLN Pusdiklat."
-text = """
-Selamat datang di program pelatihan "Data Science in Power Plant". -- Apakah Anda siap untuk meningkatkan keterampilan Anda dalam dunia pembangkit listrik dengan memanfaatkan kekuatan data science? -- Program pelatihan ini dirancang untuk memberi Anda pemahaman yang komprehensif tentang bagaimana data science dapat diterapkan secara efektif dalam industri pembangkit listrik.
+# text = """
+# Di tengah kesibukan PLN Pusdiklat Jakarta, para pedagang kaki lima menjajakan aneka kuliner tradisional dengan semangat. Keragaman budaya Indonesia terlihat dari berbagai cita rasa yang menggugah selera.
 
-"""
+# """
+
+text = "tes suara"
 
 # Adjust the speaking_rate value to make the speech slower
 # 0.5 is half speed, 1.0 is normal speed, 2.0 is double speed
@@ -72,7 +75,7 @@ try:
     # Check if the request was successful
     if response.status_code == 200:
         # Get a unique filename
-        output_filename = get_unique_filename("output.mp3")
+        output_filename = get_unique_filename(f"{voice_id}_output.mp3")
 
         # Save the audio content to a file
         with open(output_filename, "wb") as audio_file:
