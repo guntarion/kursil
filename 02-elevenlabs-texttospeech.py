@@ -1,6 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
@@ -50,26 +51,37 @@ headers = {
     "xi-api-key": api_key
 }
 
+
 def get_unique_filename(base_name):
-    counter = 0
+    # Get current date and time
+    now = datetime.now()
+    # Format: YYYYMMDD_HHMM
+    timestamp = now.strftime("%Y%m%d_%H%M")
+
+    # Split the base_name into name and extension
     name, ext = os.path.splitext(base_name)
+
+    # Create filename with timestamp
+    counter = 0
     while True:
         if counter == 0:
-            file_name = f"{name}{ext}"
+            file_name = f"{name}_{timestamp}{ext}"
         else:
-            file_name = f"{name}({counter}){ext}"
-        
+            file_name = f"{name}_{timestamp}_{counter}{ext}"
+
         if not os.path.exists(file_name):
             return file_name
         counter += 1
 
+
 try:
-    response = requests.post(url.format(voice_id=voice_id), json=payload, headers=headers)
-    
+    response = requests.post(url.format(
+        voice_id=voice_id), json=payload, headers=headers)
+
     # Print the full response for debugging
     # print(f"Response Status Code: {response.status_code}")
     # print(f"Response Content: {response.text}")
-    
+
     response.raise_for_status()  # Raise an exception for bad status codes
 
     # Check if the request was successful
